@@ -1,6 +1,13 @@
 <?php
 session_start();
-$mdp = "admin123";
+$mdp = "admin";
+
+// Déconnexion
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: admin.php");
+    exit;
+}
 
 if (isset($_POST['password'])) {
     if ($_POST['password'] === $mdp) {
@@ -35,7 +42,10 @@ if (isset($_POST['password'])) {
     <?php else: ?>
         <div class="d-flex justify-content-between align-items-center">
             <h2><i class="bi bi-inbox-fill"></i> Tickets enregistrés</h2>
-            <a href="index.php" class="btn btn-outline-secondary"><i class="bi bi-house"></i> Retour</a>
+            <div>
+                <a href="index.php" class="btn btn-outline-secondary me-2"><i class="bi bi-house"></i> Retour</a>
+                <a href="?logout=1" class="btn btn-outline-danger"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>
+            </div>
         </div>
         <hr>
         <?php
